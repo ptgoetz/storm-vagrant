@@ -6,9 +6,9 @@ apt-get install -y unzip supervisor openjdk-6-jdk
 groupadd storm
 useradd --gid storm --home-dir /home/storm --create-home --shell /bin/bash storm
 
-unzip -o /vagrant/storm-0.9.0-rc2.zip -d /usr/share/
-chown -R storm:storm /usr/share/storm-0.9.0-rc2
-ln -s /usr/share/storm-0.9.0-rc2 /usr/share/storm
+unzip -o /vagrant/$1.zip -d /usr/share/
+chown -R storm:storm /usr/share/$1
+ln -s /usr/share/$1 /usr/share/storm
 ln -s /usr/share/storm/bin/storm /usr/bin/storm
 
 mkdir /etc/storm
