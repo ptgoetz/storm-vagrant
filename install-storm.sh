@@ -1,5 +1,4 @@
-apt-get update
-apt-get install -y unzip supervisor openjdk-6-jdk
+apt-get install -y unzip supervisor
 
 /etc/init.d/supervisor stop
 
