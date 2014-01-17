@@ -23,10 +23,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     `wget -N #{STORM_DIST_URL}`
   end
   
+  config.vm.define "ganglia" do |node|
+    node.vm.network "private_network", ip: "192.168.202.2"
+    node.vm.hostname = "ganglia"
+    node.vm.provision "shell", path: "install-gmetad.sh"
+  end
+  
   config.vm.define "zookeeper" do |zookeeper|
     zookeeper.vm.network "private_network", ip: "192.168.202.3"
     zookeeper.vm.hostname = "zookeeper"
     zookeeper.vm.provision "shell", path: "install-zookeeper.sh"
+    zookeeper.vm.provision "shell", path: "install-gmond.sh"
   end
 
   config.vm.define "nimbus" do |nimbus|
@@ -37,6 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     nimbus.vm.provision "shell", path: "config-supervisord.sh", args: "ui"
     nimbus.vm.provision "shell", path: "config-supervisord.sh", args: "drpc"
     nimbus.vm.provision "shell", path: "start-supervisord.sh"
+    nimbus.vm.provision "shell", path: "install-gmond.sh"
   end
 
   (1..STORM_SUPERVISOR_COUNT).each do |n|
@@ -47,6 +55,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       supervisor.vm.provision "shell", path: "config-supervisord.sh", args: "supervisor"
       supervisor.vm.provision "shell", path: "config-supervisord.sh", args: "logviewer"
       supervisor.vm.provision "shell", path: "start-supervisord.sh"
+      supervisor.vm.provision "shell", path: "install-gmond.sh"
     end
   end
 end
