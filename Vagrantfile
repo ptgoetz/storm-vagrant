@@ -3,7 +3,7 @@
 
 require 'uri'
 # Configuration
-STORM_DIST_URL = "https://dl.dropboxusercontent.com/s/dj86w8ojecgsam7/storm-0.9.0.1.zip"
+STORM_DIST_URL = "https://dist.apache.org/repos/dist/release/incubator/storm/apache-storm-0.9.1-incubating/apache-storm-0.9.1-incubating-SNAPSHOT.zip"
 STORM_SUPERVISOR_COUNT = 2
 STORM_BOX_TYPE = "precise64-openjdk6"
 # end Configuration
@@ -17,6 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.hostmanager.manage_host = true
   config.hostmanager.enabled = true
+  config.vm.provision :hostmanager
   config.vm.box = STORM_BOX_TYPE
 
   if(!File.exist?(STORM_ARCHIVE))
@@ -24,38 +25,48 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   
   config.vm.define "ganglia" do |node|
-    node.vm.network "private_network", ip: "192.168.202.2"
+    ip = "192.168.202.2"
+    node.vm.network "private_network", ip: ip
     node.vm.hostname = "ganglia"
     node.vm.provision "shell", path: "install-gmetad.sh"
   end
   
   config.vm.define "zookeeper" do |zookeeper|
-    zookeeper.vm.network "private_network", ip: "192.168.202.3"
+    ip = "192.168.202.3"
+    zookeeper.vm.network "private_network", ip: ip
     zookeeper.vm.hostname = "zookeeper"
     zookeeper.vm.provision "shell", path: "install-zookeeper.sh"
-    zookeeper.vm.provision "shell", path: "install-gmond.sh"
+    zookeeper.vm.provision "shell", path: "install-gmond.sh", args: ip
+    zookeeper.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"] = "1024"
+      #v.vmx["numvcpus"] = "2"
+    end
   end
 
   config.vm.define "nimbus" do |nimbus|
-    nimbus.vm.network "private_network", ip: "192.168.202.4"
+    ip = "192.168.202.4"
+    nimbus.vm.network "private_network", ip: ip
     nimbus.vm.hostname = "nimbus"
-    nimbus.vm.provision "shell", path: "install-storm.sh", args: STORM_VERSION
+    nimbus.vm.provision "shell", path: "install-gmond.sh", args: ip
+    nimbus.vm.provision "shell", path: "install-storm.sh", args: [STORM_VERSION, "localhost"]
     nimbus.vm.provision "shell", path: "config-supervisord.sh", args: "nimbus"
     nimbus.vm.provision "shell", path: "config-supervisord.sh", args: "ui"
     nimbus.vm.provision "shell", path: "config-supervisord.sh", args: "drpc"
     nimbus.vm.provision "shell", path: "start-supervisord.sh"
-    nimbus.vm.provision "shell", path: "install-gmond.sh"
+    
   end
 
   (1..STORM_SUPERVISOR_COUNT).each do |n|
     config.vm.define "supervisor#{n}" do |supervisor|
-      supervisor.vm.network "private_network", ip: "192.168.202.#{4 + n}"
+      ip = "192.168.202.#{4 + n}"
+      supervisor.vm.network "private_network", ip: ip
       supervisor.vm.hostname = "supervisor#{n}"
-      supervisor.vm.provision "shell", path: "install-storm.sh", args: STORM_VERSION
+      supervisor.vm.provision "shell", path: "install-gmond.sh", args: ip
+      supervisor.vm.provision "shell", path: "install-storm.sh", args: [STORM_VERSION, "localhost"]
       supervisor.vm.provision "shell", path: "config-supervisord.sh", args: "supervisor"
       supervisor.vm.provision "shell", path: "config-supervisord.sh", args: "logviewer"
       supervisor.vm.provision "shell", path: "start-supervisord.sh"
-      supervisor.vm.provision "shell", path: "install-gmond.sh"
+      
     end
   end
 end

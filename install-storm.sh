@@ -1,4 +1,4 @@
-apt-get install -y unzip supervisor
+apt-get install -y supervisor unzip
 
 /etc/init.d/supervisor stop
 
@@ -20,5 +20,8 @@ ln -s /usr/share/storm/conf/storm.yaml /etc/storm/storm.yaml
 
 mkdir /var/log/storm
 chown storm:storm /var/log/storm
+
+# "s/\${host}/$FOO/g"
+sed -i "s/\${host}/$2/g" /usr/share/storm/conf/storm.yaml
 
 #sed -i 's/${storm.home}\/logs/\/var\/log\/storm/g' /usr/share/storm/logback/cluster.xml

@@ -14,8 +14,12 @@ storm.messaging.netty.max_wait_ms: 5000
 drpc.servers:
   - "nimbus"
 
-supervisor.childopts: "-javaagent:/vagrant/jmxetric/jmxetric-1.0.4.jar=host=localhost,port=8649,wireformat31x=true,mode=multicast,config=/vagrant/jmxetric/jmxetric-conf.xml,process=Supervisor_JVM -Xmx256m"
+topology.metrics.consumer.register:
+  - class: "backtype.storm.metric.LoggingMetricsConsumer"
+    parallelism.hint: 1
 
-nimbus.childopts: "-javaagent:/vagrant/jmxetric/jmxetric-1.0.4.jar=host=localhost,port=8649,wireformat31x=true,mode=multicast,config=/vagrant/jmxetric/jmxetric-conf.xml,process=Nimbus_JVM -Xmx1024m"
+supervisor.childopts: "-javaagent:/vagrant/jmxetric/jmxetric-1.0.4.jar=host=ganglia,port=8649,wireformat31x=true,mode=unicast,config=/vagrant/jmxetric/jmxetric-conf.xml,process=Supervisor_JVM -Xmx256m"
 
-worker.childopts: "-javaagent:/vagrant/jmxetric/jmxetric-1.0.4.jar=host=localhost,port=8649,wireformat31x=true,mode=multicast,config=/vagrant/jmxetric/jmxetric-conf.xml,process=Worker_%ID%_JVM -Xmx768m"
+nimbus.childopts: "-javaagent:/vagrant/jmxetric/jmxetric-1.0.4.jar=host=ganglia,port=8649,wireformat31x=true,mode=unicast,config=/vagrant/jmxetric/jmxetric-conf.xml,process=Nimbus_JVM -Xmx1024m"
+
+worker.childopts: "-javaagent:/vagrant/jmxetric/jmxetric-1.0.4.jar=host=ganglia,port=8649,wireformat31x=true,mode=unicast,config=/vagrant/jmxetric/jmxetric-conf.xml,process=Worker_%ID%_JVM -Xmx768m"
