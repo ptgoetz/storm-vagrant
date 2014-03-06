@@ -3,9 +3,9 @@
 
 require 'uri'
 # Configuration
-STORM_DIST_URL = "https://dist.apache.org/repos/dist/release/incubator/storm/apache-storm-0.9.1-incubating/apache-storm-0.9.1-incubating-SNAPSHOT.zip"
+STORM_DIST_URL = "https://dist.apache.org/repos/dist/release/incubator/storm/apache-storm-0.9.1-incubating/apache-storm-0.9.1-incubating.zip"
 STORM_SUPERVISOR_COUNT = 2
-STORM_BOX_TYPE = "precise64-openjdk6"
+STORM_BOX_TYPE = "precise64"
 # end Configuration
 
 STORM_ARCHIVE = File.basename(URI.parse(STORM_DIST_URL).path)

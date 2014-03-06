@@ -1,3 +1,4 @@
+apt-get update
 apt-get install --yes ganglia-monitor ganglia-webfrontend gmetad rrdtool 
 
 cp /vagrant/master-gmond.conf /etc/ganglia/gmond.conf

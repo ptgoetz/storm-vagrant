@@ -1,4 +1,5 @@
-apt-get install -y supervisor unzip
+apt-get update
+apt-get install -y supervisor openjdk-7-jdk
 
 /etc/init.d/supervisor stop
 
