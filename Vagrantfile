@@ -59,4 +59,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       
     end
   end
+  
+  # single-node pseudo cluster
+  config.vm.define "hadoop" do |node|
+    ip = "192.168.202.10"
+    node.vm.network "private_network", ip: ip
+    node.vm.hostname = "hadoop"
+    node.vm.provision "shell", path: "hadoop/install-hadoop.sh"
+  end
+  
 end
