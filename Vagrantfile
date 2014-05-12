@@ -3,7 +3,7 @@
 
 require 'uri'
 # Configuration
-STORM_DIST_URL = "https://dist.apache.org/repos/dist/release/incubator/storm/apache-storm-0.9.1-incubating/apache-storm-0.9.1-incubating.zip"
+STORM_DIST_URL = "https://dist.apache.org/repos/dist/release/incubator/storm/apache-storm-0.9.1-incubating/apache-storm-0.9.2-incubating-SNAPSHOT.zip"
 STORM_SUPERVISOR_COUNT = 2
 STORM_BOX_TYPE = "precise64"
 # end Configuration
