@@ -1,0 +1,12 @@
+# /etc/udev/rules.d/70-disable-random-entropy-estimation.rules
+# Disables /dev/random entropy estimation (it's mostly snake oil anyway).
+#
+# udevd will warn that the kernel-provided name 'random' and NAME= 'eerandom'
+# disagree.  You can ignore this warning.
+
+# Use /dev/eerandom instead of /dev/random for the entropy-estimating RNG.
+KERNEL=="random", NAME="eerandom"
+
+# Remove any existing /dev/random, then create symlink /dev/random pointing to
+# /dev/urandom
+KERNEL=="urandom", PROGRAM+="/bin/rm -f /dev/random", SYMLINK+="random"

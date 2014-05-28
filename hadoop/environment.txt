@@ -1,5 +1,0 @@
-
-HADOOP_INSTALL=/home/vagrant/hadoop
-export HADOOP_INSTALL
-export PATH=$PATH:$HADOOP_INSTALL/bin:$HADOOP_INSTALL/sbin
-export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:jre/bin/java::")

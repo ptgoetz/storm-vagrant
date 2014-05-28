@@ -1,0 +1,18 @@
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	zookeeper.witzend.com. root.localhost. (
+			     11		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	zookeeper.
+3	IN	PTR	zookeeper.witzend.com.
+
+4 IN PTR nimbus.witzend.com.
+5 IN PTR supervisor1.witzend.com.
+6 IN PTR supervisor2.witzend.com.
+20 IN PTR kdc.witzend.com.

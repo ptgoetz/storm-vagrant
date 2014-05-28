@@ -1,7 +1,10 @@
 echo "127.0.0.1	localhost" > /etc/hosts
+cp /vagrant/krb5.conf /etc/
 
-apt-get update
-apt-get install -y supervisor unzip openjdk-6-jdk
+cp /vagrant/resolvconf_base.txt /etc/resolvconf/resolv.conf.d/base
+resolvconf -u
+
+apt-get install -y supervisor unzip openjdk-7-jdk krb5-user
 
 /etc/init.d/supervisor stop
 
@@ -24,7 +27,6 @@ ln -s /usr/share/storm/conf/storm.yaml /etc/storm/storm.yaml
 mkdir /var/log/storm
 chown storm:storm /var/log/storm
 
-# "s/\${host}/$FOO/g"
 sed -i "s/\${host}/$2/g" /usr/share/storm/conf/storm.yaml
 
 #sed -i 's/${storm.home}\/logs/\/var\/log\/storm/g' /usr/share/storm/logback/cluster.xml
