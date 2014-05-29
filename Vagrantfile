@@ -11,7 +11,7 @@ require 'uri'
 STORM_DIST_URL = "https://people.apache.org/~ptgoetz/storm/security/apache-storm-0.9.2-incubating-SNAPSHOT.zip"
 
 STORM_SUPERVISOR_COUNT = 2
-STORM_BOX_TYPE = "precise64"
+STORM_BOX_TYPE = "hashicorp/precise64"
 # end Configuration
 
 STORM_ARCHIVE = File.basename(URI.parse(STORM_DIST_URL).path)
