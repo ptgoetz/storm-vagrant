@@ -45,7 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.network "private_network", ip: ip
     node.vm.hostname = "nimbus"
     node.vm.provision "shell", inline: "apt-get update"
-    node.vm.provision "shell", path: "install-storm.sh", args: [STORM_VERSION, "localhost", "nimbus"]
+    node.vm.provision "shell", path: "install-storm.sh", args: [STORM_VERSION, "localhost", "nimbus.witzend.com", "nimbus"]
     node.vm.provision "shell", path: "config-supervisord.sh", args: "nimbus"
     node.vm.provision "shell", path: "config-supervisord.sh", args: "ui"
     node.vm.provision "shell", path: "config-supervisord.sh", args: "drpc"
@@ -58,7 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.network "private_network", ip: ip
       node.vm.hostname = "supervisor#{n}"
       node.vm.provision "shell", inline: "apt-get update"
-      node.vm.provision "shell", path: "install-storm.sh", args: [STORM_VERSION, "localhost", "supervisor#{n}"]
+      node.vm.provision "shell", path: "install-storm.sh", args: [STORM_VERSION, "localhost", "supervisor#{n}.witzend.com", "supervisor#{n}"]
       node.vm.provision "shell", path: "config-supervisord.sh", args: "supervisor"
       node.vm.provision "shell", path: "config-supervisord.sh", args: "logviewer"
       node.vm.provision "shell", path: "start-supervisord.sh"

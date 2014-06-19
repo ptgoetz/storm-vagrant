@@ -1,5 +1,5 @@
 echo "127.0.0.1	localhost" > /etc/hosts
-echo "127.0.1.1	$3 $3" >> /etc/hosts
+echo "127.0.1.1	$3 $4" >> /etc/hosts
 cp /vagrant/krb5.conf /etc/
 
 cp /vagrant/resolvconf_base.txt /etc/resolvconf/resolv.conf.d/base
