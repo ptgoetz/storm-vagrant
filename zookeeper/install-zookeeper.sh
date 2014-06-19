@@ -1,7 +1,9 @@
 cp /vagrant/kerberos/krb5.conf /etc/
 
+cp /vagrant/dhclient.conf /etc/dhcp/
 cp /vagrant/resolvconf_base.txt /etc/resolvconf/resolv.conf.d/base
 resolvconf -u
+/etc/init.d/networking restart
 
 groupadd zookeeper
 useradd --gid zookeeper --home-dir /home/zookeeper --create-home --shell /bin/bash zookeeper

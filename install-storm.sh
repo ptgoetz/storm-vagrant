@@ -1,8 +1,11 @@
 echo "127.0.0.1	localhost" > /etc/hosts
+echo "127.0.1.1	$3 $3" >> /etc/hosts
 cp /vagrant/krb5.conf /etc/
 
 cp /vagrant/resolvconf_base.txt /etc/resolvconf/resolv.conf.d/base
+cp /vagrant/dhclient.conf /etc/dhcp/
 resolvconf -u
+/etc/init.d/networking restart
 
 apt-get install -y supervisor unzip openjdk-7-jdk krb5-user
 
@@ -22,7 +25,7 @@ chown storm:storm /etc/storm
 rm /usr/share/storm/conf/storm.yaml
 cp /vagrant/storm.yaml /usr/share/storm/conf/
 cp /vagrant/cluster.xml /usr/share/storm/logback/
-ln -s /usr/share/storm/conf/storm.yaml /etc/storm/storm.yaml 
+ln -s /usr/share/storm/conf/storm.yaml /etc/storm/storm.yaml
 
 mkdir /var/log/storm
 chown storm:storm /var/log/storm
