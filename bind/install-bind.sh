@@ -6,7 +6,6 @@ cp /vagrant/bind/named.conf.local /etc/bind/named.conf.local
 cp /vagrant/bind/named.conf.options /etc/bind/named.conf.options
 
 cp /vagrant/bind/sysctl.conf /etc/sysctl.conf
-cp /vagrant/bind/bind9_default /etc/default/bind9
 sysctl -p
 
 /etc/init.d/bind9 restart
