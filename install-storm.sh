@@ -13,6 +13,7 @@ apt-get install -y supervisor unzip openjdk-7-jdk krb5-user
 
 groupadd storm
 useradd --gid storm --home-dir /home/storm --create-home --shell /bin/bash storm
+useradd --gid storm --home-dir /home/harsha --create-home --shell /bin/bash harsha
 
 unzip -o /vagrant/$1.zip -d /usr/share/
 chown -R storm:storm /usr/share/$1

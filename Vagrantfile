@@ -8,7 +8,7 @@ require 'uri'
 # if the file is not already in the same directory as the Vagrantfile.
 # to supply a custom build, drop it next to the Vagrantfile and make sure the file name
 # matches the file in the URL.
-STORM_DIST_URL = "https://people.apache.org/~ptgoetz/storm/security/apache-storm-0.9.2-incubating-SNAPSHOT.zip"
+STORM_DIST_URL = "https://people.apache.org/~ptgoetz/storm/security/apache-storm-0.9.3-incubating-SNAPSHOT.zip"
 
 STORM_SUPERVISOR_COUNT = 2
 STORM_BOX_TYPE = "hashicorp/precise64"
