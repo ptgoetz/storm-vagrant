@@ -24,4 +24,7 @@ cp /vagrant/zookeeper/jaas.conf /usr/share/zookeeper/conf/
 
 chown -R zookeeper:zookeeper /usr/share/zookeeper-3.4.6
 
+mkdir /var/log/zookeeper
+chown -R zookeeper:zookeeper /var/log/zookeeper
+
 start zookeeper

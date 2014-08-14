@@ -28,15 +28,15 @@ sudo /usr/sbin/kadmin.local -q 'change_password -pw storm storm@WITZEND.COM'
 sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/storm.keytab storm@WITZEND.COM"
 
 # user to submit topologies
-sudo /usr/sbin/kadmin.local -q 'addprinc -randkey harsha/nimbus.witzend.com@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/harsha.keytab harsha/nimbus.witzend.com@WITZEND.COM"
+sudo /usr/sbin/kadmin.local -q 'addprinc -randkey testuser1/nimbus.witzend.com@WITZEND.COM'
+sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/testuser1.keytab testuser1/nimbus.witzend.com@WITZEND.COM"
 
-sudo /usr/sbin/kadmin.local -q 'addprinc -randkey testuser/nimbus.witzend.com@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/testuser.keytab testuser/nimbus.witzend.com@WITZEND.COM"
+sudo /usr/sbin/kadmin.local -q 'addprinc -randkey testuser2/nimbus.witzend.com@WITZEND.COM'
+sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/testuser2.keytab testuser2/nimbus.witzend.com@WITZEND.COM"
 
 mkdir /vagrant/keytabs
 cp /tmp/storm.keytab /vagrant/keytabs/
 cp /tmp/zk.keytab /vagrant/keytabs/
 cp /tmp/http.keytab /vagrant/keytabs/
-cp /tmp/harsha.keytab /vagrant/keytabs/
-cp /tmp/testuser.keytab /vagrant/keytabs/
+cp /tmp/testuser1.keytab /vagrant/keytabs/
+cp /tmp/testuser2.keytab /vagrant/keytabs/
