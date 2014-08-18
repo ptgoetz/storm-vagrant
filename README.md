@@ -47,3 +47,8 @@ It will spin up 4 vms with kerberos and storm cluster running.
   network.negotiate-auth.trusted-uris set it to http://nimbus.witzend.com:8080 
 + run kinit -k -t storm-vagrant/keytabs/testuser1.keytab testuser1/nimbus.witzend.com
 + you'll be logged into nimbus as testuser1
+
+### wordcount topology
++ vagrant ssh nimbus
++ sudo su testuser1
++ storm jar /usr/share/storm/examples/storm-starter/storm-starter-topologies-0.9.3-incubating-SNAPSHOT.jar storm.starter.WordCountTopology wordcount
