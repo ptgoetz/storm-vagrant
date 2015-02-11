@@ -14,7 +14,7 @@ apt-get install -y supervisor unzip openjdk-7-jdk krb5-user
 groupadd storm
 useradd --gid storm --home-dir /home/storm --create-home --shell /bin/bash storm
 useradd --gid storm --home-dir /home/testuser1 --create-home --shell /bin/bash testuser1
-useradd --gid storm --home-dir /home/testuser2 --create-home --shell /bin/bash testuser1
+useradd --gid storm --home-dir /home/testuser2 --create-home --shell /bin/bash testuser2
 
 mkdir /home/testuser1/.storm
 cp /vagrant/testuser1_storm.yaml /home/testuser1/.storm/storm.yaml
